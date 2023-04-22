@@ -1,5 +1,5 @@
 APP_NAME=thoth-notes
-APP_VERSION=v0.8.0
+APP_VERSION=v0.9.0
 
 
 .PHONEY: run dev prod clean
