@@ -4,13 +4,16 @@ You can also mark your notes as important to make them easier to find later. Pre
 Add Note button to get started.
 
 ## Future Features
-- [ ] Add a search bar
-- [ ] Add tags / topics
-- [ ] Separate created and updated dates
-    - [ ] Order by created date
-    - [ ] Order important notes feed by updated date
-- [ ] Add image list
-- [ ] Add related notes list
+    [X] Add a search bar
+    [X] Add tags / topics
+    [X] Separate created and updated dates
+        [ ] Order by created date
+        [ ] Order important notes feed by updated date
+    [ ] Add image list
+    [ ] Add related notes list
 
-## Bugs
-- [] Getting the dates to show up right
+## Bugs / Refactoring
+    [ ] Getting the dates to show up right
+    [ ] When page is up, deleting from list leaves page up until switching pages
+    [ ] clean up tags display into its own component
+

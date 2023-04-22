@@ -6,6 +6,10 @@ export function CreateNote(arg1, arg2, arg3, arg4) {
   return window['go']['backend']['NotesHandler']['CreateNote'](arg1, arg2, arg3, arg4);
 }
 
+export function CreateNoteWithTags(arg1, arg2, arg3, arg4, arg5) {
+  return window['go']['backend']['NotesHandler']['CreateNoteWithTags'](arg1, arg2, arg3, arg4, arg5);
+}
+
 export function DeleteNoteByID(arg1) {
   return window['go']['backend']['NotesHandler']['DeleteNoteByID'](arg1);
 }
@@ -18,6 +22,6 @@ export function GetNotes() {
   return window['go']['backend']['NotesHandler']['GetNotes']();
 }
 
-export function UpdateNoteByID(arg1, arg2, arg3, arg4, arg5) {
-  return window['go']['backend']['NotesHandler']['UpdateNoteByID'](arg1, arg2, arg3, arg4, arg5);
+export function UpdateNoteByID(arg1, arg2, arg3, arg4, arg5, arg6) {
+  return window['go']['backend']['NotesHandler']['UpdateNoteByID'](arg1, arg2, arg3, arg4, arg5, arg6);
 }

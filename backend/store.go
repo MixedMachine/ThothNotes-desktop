@@ -57,7 +57,7 @@ func (store *Store) Get(element *Note) error {
 }
 
 func (store *Store) GetAll() error {
-	response := store.db.Find(store.currentElements)
+	response := store.db.Preload("Tags").Find(store.currentElements)
 
 	if response.Error != nil {
 		return response.Error
@@ -87,7 +87,12 @@ func (store *Store) Update(element *Note) error {
 }
 
 func (store *Store) Delete(element *Note) error {
+	err := store.db.Model(element).Association("Tags").Clear()
+	if err != nil {
+		return err
+	}
 	response := store.db.Delete(element)
+
 
 	if response.Error != nil {
 		return response.Error

@@ -9,9 +9,14 @@
     import NotesPage from "./NotesPage.svelte";
 	import { createEventDispatcher } from 'svelte';
     import type { backend } from "../../wailsjs/go/models";
+    import NoteSearch from "./NoteSearch.svelte";
+    import { mdiConsoleNetwork } from "@mdi/js";
 
     export let active;
     export let notes;
+
+    let displayNotes = notes;
+    // $: console.log(fullNotes);
 
     let open = true;
     let dispatch = createEventDispatcher();
@@ -26,20 +31,58 @@
         dispatch ("new");
     }
 
+    function resetNotes() {
+        displayNotes = notes;
+    }
+
+    function onSearch(event: CustomEvent<any>) {
+        if (event.detail.search.length > 0) {
+            console.log("searching...")
+            displayNotes = notes.filter((note) => {
+                return (
+                    note.title
+                        .toLowerCase()
+                        .includes(event.detail.search.toLowerCase()) ||
+                    note.summary
+                        .toLowerCase()
+                        .includes(event.detail.search.toLowerCase()) ||
+                    note.tags
+                        .map((tag) => tag.name)
+                        .join(", ")
+                        .toLowerCase()
+                        .includes(event.detail.search.toLowerCase())
+                );
+            });
+            console.log(notes);
+        } else {
+            console.log("reseting...")
+            resetNotes();
+        }
+    }
+
     function onSaved() {
         dispatch ("saved");
+        setTimeout(() => {
+            resetNotes();
+        }, 200);
     }
 
     function onUpdate(event: CustomEvent<any>) {
         dispatch ("update", {
             note: event.detail.note
         });
+        setTimeout(() => {
+            resetNotes();
+        }, 200);
     }
 
     function onDelete(id: number) {
         dispatch ("delete", {
             id: id
         });
+        setTimeout(() => {
+            resetNotes();
+        }, 200);
     }
 
 </script>
@@ -56,7 +99,8 @@
                     <Text>New Note</Text>
                 </Item>
                 <Separator />
-                {#each notes as item}
+                <NoteSearch on:search={(event) => onSearch(event)} />
+                {#each displayNotes as item}
                     <Item
                         href="javascript:void(0)"
                         on:click={() => setActive(item)}

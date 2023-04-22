@@ -2,6 +2,7 @@
     import { addNote } from "../utils/Notes";
     import { createEventDispatcher } from "svelte";
     import Textfield, { Input, Textarea } from "@smui/textfield";
+    import HelperText from "@smui/textfield/helper-text";
     import IconButton, { Icon } from "@smui/icon-button";
     import { mdiContentSaveOutline, mdiCloseThick } from "@mdi/js";
     import { Svg } from "@smui/common";
@@ -10,6 +11,8 @@
     import FloatingLabel from "@smui/floating-label";
     import LineRipple from "@smui/line-ripple";
     import NotchedOutline from "@smui/notched-outline";
+    import Chip, { Set, Text } from '@smui/chips';
+    import {backend} from "../../wailsjs/go/models";
 
     let dispatch = createEventDispatcher();
 
@@ -30,8 +33,24 @@
     let contentNotchedOutline: NotchedOutline;
     let contentFloatingLabel: FloatingLabel;
 
+    let tagsValue = "";
+    let tagsInput: Input;
+    let tagsFloatingLabel: FloatingLabel;
+    let tagsLineRipple: LineRipple;
+
+    let tags = [] as backend.Tag[];
+
+    $: {
+        if (tagsValue.length > 0) {
+            tags = tagsValue.split(",").map((tag) => {
+                return new backend.Tag({name: tag.trim()});
+            });
+        }
+    }
+
     function reset() {
         titleValue = "";
+        tagsValue = "";
         summaryValue = "";
         importantValue = false;
         contentValue = "";
@@ -42,17 +61,13 @@
     async function save() {
         console.log("Saving note...");
 
-        await addNote({
+        await addNote(new backend.Note({
             title: titleValue,
             summary: summaryValue,
             important: importantValue,
             content: contentValue,
-            id: undefined,
-            date: undefined,
-            convertValues: function (a: any, classs: any, asMap?: boolean) {
-                throw new Error("Function not implemented.");
-            }
-        })
+            tags: tags,
+        }));
 
         setTimeout(function () {
             dispatch("saved");
@@ -83,6 +98,37 @@
             <LineRipple bind:this={titleLineRipple} slot="ripple" />
         </Textfield>
     </div>
+    <br />
+    <div>
+        <Textfield
+            bind:input={tagsInput}
+            bind:floatingLabel={tagsFloatingLabel}
+            bind:lineRipple={tagsLineRipple}
+            style="width: 98%; margin: 0.5rem;"
+        >
+            <FloatingLabel
+                bind:this={tagsFloatingLabel}
+                for="input-manual-a"
+                slot="label">Tags</FloatingLabel
+            >
+            <Input
+                bind:this={tagsInput}
+                bind:value={tagsValue}
+                id="input-manual-a"
+            />
+            <HelperText>Separate tags with a comma</HelperText>
+            <LineRipple bind:this={tagsLineRipple} slot="ripple" />
+        </Textfield>
+    </div>
+    <pre>
+        <div class="tag-container">
+            {#each tags as tag}
+            <div class="tag">
+                {tag.name}
+            </div>
+            {/each}
+        </div>
+    </pre>
     <br />
     <div>
         <Textfield
@@ -148,4 +194,24 @@
         </IconButton>
     </div>
 </div>
-<div />
+
+<style>
+    .tag-container {
+        display: flex;
+        max-width: 98%;
+        flex-wrap: wrap;
+        }
+    .tag {
+        display: flex;
+        background-color: #222;
+        border-radius: 100px;
+        margin: 2px;
+        font-size: medium;
+        overflow-wrap: scroll;
+        height: 20px;
+        width: 60px;
+        max-width: 75px;
+        justify-content: center;
+        text-align: center;
+    }
+</style>

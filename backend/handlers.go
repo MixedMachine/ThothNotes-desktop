@@ -51,7 +51,19 @@ func (handler *NotesHandler) CreateNote(title, summary, content string, importan
 	})
 }
 
-func (handler *NotesHandler) UpdateNoteByID(id int, title, summary, content string, important bool) Note {
+func (handler *NotesHandler) CreateNoteWithTags(title, summary, content string, important bool, tags []Tag) {
+	handler.store.Reset()
+	handler.store.Create(&Note{
+		Title:     title,
+		Summary:   summary,
+		Content:   content,
+		CreatedDate: 	time.Now(),
+		Important: important,
+		Tags:      tags,
+	})
+}
+
+func (handler *NotesHandler) UpdateNoteByID(id int, title, summary, content string, important bool, tags []Tag) Note {
 	log.Info("UpdateNoteByID() called")
 	handler.store.Reset()
 	handler.store.Update(&Note{
@@ -61,6 +73,7 @@ func (handler *NotesHandler) UpdateNoteByID(id int, title, summary, content stri
 		Content:   content,
 		UpdatedDate: 	time.Now(),
 		Important: important,
+		Tags:      tags,
 	})
 	return handler.store.GetElement()
 }

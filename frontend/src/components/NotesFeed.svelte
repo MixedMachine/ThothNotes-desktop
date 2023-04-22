@@ -22,7 +22,7 @@
 </script>
 
 <div>
-    <div class="head"><h3>Important Notes Feed</h3></div>
+    <div class="head"><h3>Important Notes</h3></div>
     <List
         class="notes-list"
         bind:this={list}

@@ -1,4 +1,4 @@
-import { CreateNote, DeleteNoteByID, GetNotes, GetNoteByID, UpdateNoteByID } from '../../wailsjs/go/backend/NotesHandler'
+import { CreateNote, DeleteNoteByID, GetNotes, GetNoteByID, UpdateNoteByID, CreateNoteWithTags } from '../../wailsjs/go/backend/NotesHandler'
 import type { backend } from '../../wailsjs/go/models'
 
 export async function getNotes () {
@@ -25,10 +25,10 @@ export async function deleteNote (id: number) {
 
 export function updateNote (note: backend.Note) {
     console.log('updateNote')
-    UpdateNoteByID(note.id, note.title, note.summary, note.content, note.important)
+    UpdateNoteByID(note.id, note.title, note.summary, note.content, note.important, note.tags)
 }
 
 export function addNote (note: backend.Note) {
     console.log('addNote')
-    CreateNote(note.title, note.summary, note.content, note.important)
+    CreateNoteWithTags(note.title, note.summary, note.content, note.important, note.tags)
 }

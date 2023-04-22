@@ -4,10 +4,12 @@ import {backend} from '../models';
 
 export function CreateNote(arg1:string,arg2:string,arg3:string,arg4:boolean):Promise<void>;
 
+export function CreateNoteWithTags(arg1:string,arg2:string,arg3:string,arg4:boolean,arg5:Array<backend.Tag>):Promise<void>;
+
 export function DeleteNoteByID(arg1:number):Promise<void>;
 
 export function GetNoteByID(arg1:number):Promise<backend.Note>;
 
 export function GetNotes():Promise<Array<backend.Note>>;
 
-export function UpdateNoteByID(arg1:number,arg2:string,arg3:string,arg4:string,arg5:boolean):Promise<backend.Note>;
+export function UpdateNoteByID(arg1:number,arg2:string,arg3:string,arg4:string,arg5:boolean,arg6:Array<backend.Tag>):Promise<backend.Note>;

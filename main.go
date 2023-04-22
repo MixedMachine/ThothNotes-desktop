@@ -22,7 +22,7 @@ func main() {
 		userDir = ""
 	}
 	// Create an instance of the app structure
-	store := backend.NewStore(userDir + "/Notes.db")
+	store := backend.NewStore(userDir + "/notes.db")
 	app := backend.NewNotesHandlers(store)
 
 	// Create application with options
