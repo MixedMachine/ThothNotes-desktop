@@ -54,6 +54,7 @@
         summaryValue = "";
         importantValue = false;
         contentValue = "";
+        tags = [];
 
         titleInput.focus();
     }
