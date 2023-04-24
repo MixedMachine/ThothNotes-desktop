@@ -15,11 +15,16 @@ and the app is designed to be used offline. \
     - [ ] Order important notes feed by updated date
 - [ ] Add image list
 - [ ] Add related notes list
+- [ ] Export notes to markdown file or pdf
 
 ## Bugs / Refactoring
 - [ ] Getting the dates to show up right
 - [ ] When page is up, deleting from list leaves page up until switching pages
 - [ ] clean up tags display into its own component
+- [ ] Tag elements adjust to text size
+- [ ] created at is broken
+- [ ] Break up the note page into components
+- [ ] Create form component for new and update to reduce code duplication
 
 ## Development
 ### Requirements
