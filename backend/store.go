@@ -67,6 +67,7 @@ func (store *Store) GetAll() error {
 }
 
 func (store *Store) Create(element *Note) error {
+	element.CreatedDate = element.CreatedDate.UTC()
 	response := store.db.Create(element)
 
 	if response.Error != nil {
@@ -77,10 +78,25 @@ func (store *Store) Create(element *Note) error {
 }
 
 func (store *Store) Update(element *Note) error {
-	response := store.db.Save(element)
+	original := &Note{
+		ID: element.ID,
+		Title: element.Title,
+		Summary: element.Summary,
+		Content: element.Content,
+		CreatedDate: element.CreatedDate,
+		Important: element.Important,
+		Tags: element.Tags,
+	}
+	err := store.Delete(element)
 
-	if response.Error != nil {
-		return response.Error
+	if err != nil {
+		return err
+	}
+
+	err = store.Create(original)
+
+	if err != nil {
+		return err
 	}
 
 	return nil

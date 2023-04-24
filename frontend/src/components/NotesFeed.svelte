@@ -7,13 +7,14 @@
     } from "@smui/list";
     import { getNotes } from "../utils/Notes";
     import { createEventDispatcher } from 'svelte';
+    import type { backend } from "../../wailsjs/go/models";
 
     export let notes;
 
     let list: InstanceType<typeof List>;
     let dispatch = createEventDispatcher();
 
-    function setActive(value: Note) {
+    function setActive(value: backend.Note) {
         dispatch ("activate", {
             page: value
         });

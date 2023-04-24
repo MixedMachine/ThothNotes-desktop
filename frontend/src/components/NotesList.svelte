@@ -7,18 +7,19 @@
     import IconButton from "@smui/icon-button";
     import NewNote from "./NewNote.svelte";
     import NotesPage from "./NotesPage.svelte";
-	import { createEventDispatcher } from 'svelte';
+	import { afterUpdate, createEventDispatcher } from 'svelte';
     import type { backend } from "../../wailsjs/go/models";
     import NoteSearch from "./NoteSearch.svelte";
-    import { mdiConsoleNetwork } from "@mdi/js";
 
-    export let active;
-    export let notes;
+    export let active: backend.Note;
+    export let notes: backend.Note[];
 
     let displayNotes = notes;
-    // $: console.log(fullNotes);
+    console.log(notes);
+    console.log(displayNotes);
 
     let open = true;
+    let search = "";
     let dispatch = createEventDispatcher();
 
     function setActive(value: backend.Note) {
@@ -35,8 +36,15 @@
         displayNotes = notes;
     }
 
+    afterUpdate(() => {
+        if (search.length === 0) {
+            resetNotes();
+        }
+    });
+
     function onSearch(event: CustomEvent<any>) {
-        if (event.detail.search.length > 0) {
+        search = event.detail.search;
+        if (search.length > 0) {
             console.log("searching...")
             displayNotes = notes.filter((note) => {
                 return (

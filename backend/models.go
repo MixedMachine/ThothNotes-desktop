@@ -8,8 +8,8 @@ type Note struct {
 	Summary     string    `json:"summary" gorm:"type:varchar(500)"`
 	Content     string    `json:"content" gorm:"type:text"`
 	Tags        []Tag     `json:"tags" gorm:"many2many:note_tags"` // NoteTags is the join table
-	CreatedDate time.Time `json:"created_date" gorm:"<-:create;type:datetime;not null"`
-	UpdatedDate time.Time `json:"updated_date" gorm:"type:datetime;not null"`
+	CreatedDate time.Time `json:"created_date" gorm:"type:datetime;not null"`
+	UpdatedDate time.Time `json:"updated_date" gorm:"autoUpdateTime:milli"`
 	Important   bool      `json:"important" gorm:"type:bool"`
 }
 

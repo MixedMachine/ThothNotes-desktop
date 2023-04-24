@@ -6,6 +6,7 @@
     import IconButton, { Icon } from "@smui/icon-button";
     import { mdiContentSaveOutline, mdiCloseThick } from "@mdi/js";
     import { Svg } from "@smui/common";
+    import CharacterCounter from '@smui/textfield/character-counter';
     import FormField from "@smui/form-field";
     import Switch from "@smui/switch";
     import FloatingLabel from "@smui/floating-label";
@@ -148,8 +149,10 @@
             <Textarea
                 bind:this={summaryInput}
                 bind:value={summaryValue}
+                maxlength={500}
                 id="input-manual-b"
             />
+            <CharacterCounter slot="helper" >{summaryValue.length} / 500</CharacterCounter>
         </Textfield>
     </div>
     <br />

@@ -19,7 +19,10 @@
         mini
         class="solo-fab"
         >
-        <Icon class="material-icons">arrow_forward</Icon>
+        <Icon
+            class="material-icons"
+            style="color: var(--mdc-theme-on-primary, #fff); cursor: pointer;"
+        >arrow_forward</Icon>
     </Fab>
 </div>
 
@@ -86,15 +89,16 @@ function handleKeyDown(event: CustomEvent | KeyboardEvent) {
 
 * :global(.solo-input) {
     flex-grow: 1;
-    color: var(--mdc-theme-on-surface, #000);
+    color: var(--mdc-theme-on-surface, #fff);
 }
 
 * :global(.solo-input::placeholder) {
-    color: var(--mdc-theme-on-surface, #000);
+    color: var(--mdc-theme-on-surface, #fff);
     opacity: 0.6;
 }
 
 * :global(.solo-fab) {
     flex-shrink: 0;
+    background-color: var(--mdc-theme-primary, #ff3e00);
 }
 </style>
