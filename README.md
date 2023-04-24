@@ -44,3 +44,4 @@ and the app is designed to be used offline. \
 - installer will be in the `build/bin` folder
 - pre-built installer can also be found [here](https://thoth-notes.s3.us-west-2.amazonaws.com/ThothNotes-amd64-installer.exe)
 
+**Note:** The installer is not signed and I have not tested it on a linux or mac machine.
