@@ -12,6 +12,9 @@ run: build
 dev:
 	@CGO_ENABLED=1 wails dev
 
+dev.quick:
+	@CGO_ENABLED=1 wails dev -skipbindings -nosyncgomod
+
 test:
 	@go test ./...
 
