@@ -21,6 +21,6 @@ Add Note button to get started.
 - [ ] created at is broken
 - [ ] Break up the note page into components
 - [ ] Create form component for new and update to reduce code duplication
-- [ ] Refactor the database to store to not duplicate tags
+- [ ] Refactor the database or store to not duplicate tags
 - [ ] Update notes better
 
